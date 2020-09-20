@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCollections", "MovieCollections\MovieCollections.csproj", "{589622E5-8EDC-435F-8302-81E98D253FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCollections", "MovieCollections\MovieCollections.csproj", "{589622E5-8EDC-435F-8302-81E98D253FF8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD57E06D-48B1-4BBB-87A8-8EE25DCB5877} = {FD57E06D-48B1-4BBB-87A8-8EE25DCB5877}
+		{3600F76D-2519-4262-BC6F-E2978158827C} = {3600F76D-2519-4262-BC6F-E2978158827C}
+		{E4D74BEE-2294-437C-AC0A-A9C23F976BB2} = {E4D74BEE-2294-437C-AC0A-A9C23F976BB2}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCollections.DataAccess", "MovieCollections.DataAccess\MovieCollections.DataAccess.csproj", "{FD57E06D-48B1-4BBB-87A8-8EE25DCB5877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCollections.DataAccess", "MovieCollections.DataAccess\MovieCollections.DataAccess.csproj", "{FD57E06D-48B1-4BBB-87A8-8EE25DCB5877}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3600F76D-2519-4262-BC6F-E2978158827C} = {3600F76D-2519-4262-BC6F-E2978158827C}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCollections.Models", "MovieCollections.Models\MovieCollections.Models.csproj", "{3600F76D-2519-4262-BC6F-E2978158827C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCollections.Models", "MovieCollections.Models\MovieCollections.Models.csproj", "{3600F76D-2519-4262-BC6F-E2978158827C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCollections.Utility", "MovieCollections.Utility\MovieCollections.Utility.csproj", "{E4D74BEE-2294-437C-AC0A-A9C23F976BB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCollections.Utility", "MovieCollections.Utility\MovieCollections.Utility.csproj", "{E4D74BEE-2294-437C-AC0A-A9C23F976BB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

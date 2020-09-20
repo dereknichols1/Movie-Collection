@@ -16,5 +16,14 @@ namespace MovieCollections.Models
 
         [Display(Name = "Movie Id")]
         public int MovieId { get; set; }
+
+        [Display(Name = "Item Condition")]
+        public int ItemCondition { get; set; }
+
+        [Display(Name = "My Rating")]
+        public int MyRating { get; set; }
+
+        [Display(Name = "My Comments")]
+        public int MyComments { get; set; }
     }
 }
