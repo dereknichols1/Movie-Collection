@@ -22,6 +22,7 @@ namespace MovieCollections.DataAccess.Data.Repository
         {
             return _db.Collections.Select(i => new SelectListItem()
             {
+                Text = i.MovieItem.Movie.Title,
                 Value = i.Id.ToString()
             });
         }
@@ -30,6 +31,7 @@ namespace MovieCollections.DataAccess.Data.Repository
         {
             var objFromDb = _db.Collections.FirstOrDefault(s => s.Id == collections.Id);
 
+            objFromDb.MovieItemId = collections.MovieItemId;
             objFromDb.ItemCondition = collections.ItemCondition;
             objFromDb.MyRating = collections.MyRating;
             objFromDb.MyComments = collections.MyComments;

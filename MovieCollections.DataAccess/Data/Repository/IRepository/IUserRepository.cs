@@ -8,8 +8,7 @@ namespace MovieCollections.DataAccess.Data.Repository.IRepository
 {
     public interface IUserRepository : IRepository<User>
     {
-        IEnumerable<SelectListItem> GetUserForDropDown();
+        void Update(User user);
 
-        void Update(User foodType);
     }
 }

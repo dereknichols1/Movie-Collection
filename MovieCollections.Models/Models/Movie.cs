@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MovieCollections.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace MovieCollections.Models
@@ -14,6 +16,8 @@ namespace MovieCollections.Models
         [Display(Name = "Title")]
         public string Title { get; set; }
 
+        public string Image { get; set; }
+
         [Display(Name = "Genre")]
         public string Genre { get; set; }
 
@@ -22,5 +26,10 @@ namespace MovieCollections.Models
 
         [Display(Name = "MPAA Rating")]
         public string Rating { get; set; }
+
+        [Display(Name = "Users")]
+        public string UserId { get; set; }
+
+        public virtual ICollection<UserMovie> UserMovie { get; set; }
     }
 }

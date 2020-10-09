@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
@@ -19,6 +21,11 @@
     <ProjectReference Include="..\MovieCollections.DataAccess\MovieCollections.DataAccess.csproj" />
     <ProjectReference Include="..\MovieCollections.Models\MovieCollections.Models.csproj" />
     <ProjectReference Include="..\MovieCollections.Utility\MovieCollections.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="Pages\Collector\Home\" />
   </ItemGroup>
 
 </Project>

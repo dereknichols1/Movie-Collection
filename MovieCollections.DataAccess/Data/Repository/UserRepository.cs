@@ -18,23 +18,14 @@ namespace MovieCollections.DataAccess.Data.Repository
             _db = db;
         }
 
-        public IEnumerable<SelectListItem> GetUserForDropDown()
-        {
-            return _db.User.Select(i => new SelectListItem()
-            {
-                Text = i.Name,
-                Value = i.Id.ToString()
-            });
-        }
-
         public void Update(User user)
         {
-            var objFromDb = _db.User.FirstOrDefault(s => s.Id == user.Id);
+            var itemFromDb = _db.User.FirstOrDefault(m => m.Id == user.Id);
 
-            objFromDb.Name = user.Name;
-            objFromDb.MoviesOwned = user.MoviesOwned;
+            itemFromDb.MovieId = user.MovieId;
 
             _db.SaveChanges();
         }
-    }
+
+        }
 }

@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using MovieCollections.Models.Models;
 
 namespace MovieCollections.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
+        public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        public string LastName { get; set; }
 
-        [Display(Name = "Movies Owned")]
-        public int MoviesOwned { get; set; }
+        [NotMapped]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
+        [Display(Name = "Movies")]
+        public int MovieId { get; set; }
+
+        public virtual ICollection<UserMovie> UserMovie { get; set; }
     }
 }

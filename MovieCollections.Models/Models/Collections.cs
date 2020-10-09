@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace MovieCollections.Models
@@ -10,12 +11,8 @@ namespace MovieCollections.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "User Id")]
-        public int UserId { get; set; }
-
-        [Display(Name = "Movie Id")]
-        public int MovieId { get; set; }
+        [Display(Name = "Movie Item")]
+        public int MovieItemId { get; set; }
 
         [Display(Name = "Item Condition")]
         public int ItemCondition { get; set; }
@@ -25,5 +22,9 @@ namespace MovieCollections.Models
 
         [Display(Name = "My Comments")]
         public int MyComments { get; set; }
+
+        [ForeignKey("MovieItemId")]
+        public virtual MovieItem MovieItem { get; set; }
+
     }
 }

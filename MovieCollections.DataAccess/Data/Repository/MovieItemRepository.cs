@@ -1,4 +1,5 @@
-﻿using MovieCollections.DataAccess.Data.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using MovieCollections.DataAccess.Data.Repository.IRepository;
 using MovieCollections.Models;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,22 @@ namespace MovieCollections.DataAccess.Data.Repository
             _db = db;
         }
 
+        public IEnumerable<SelectListItem> GetMovieListForDropDown()
+        {
+            return _db.MovieItem.Select(i => new SelectListItem()
+            {
+                Text = i.Movie.Title,
+                Value = i.Id.ToString()
+            });
+        }
+
         public void Update(MovieItem movieItem)
         {
             var objFromDb = _db.MovieItem.FirstOrDefault(s => s.Id == movieItem.Id);
 
+            objFromDb.MovieId = movieItem.MovieId;
             objFromDb.MovieFormat = movieItem.MovieFormat;
+            objFromDb.Stock = movieItem.Stock;
 
             _db.SaveChanges();
         }

@@ -18,6 +18,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCollections.Models", "MovieCollections.Models\MovieCollections.Models.csproj", "{3600F76D-2519-4262-BC6F-E2978158827C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCollections.Utility", "MovieCollections.Utility\MovieCollections.Utility.csproj", "{E4D74BEE-2294-437C-AC0A-A9C23F976BB2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3600F76D-2519-4262-BC6F-E2978158827C} = {3600F76D-2519-4262-BC6F-E2978158827C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
