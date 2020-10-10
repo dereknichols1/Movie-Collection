@@ -33,6 +33,9 @@ namespace MovieCollections.DataAccess.Data.Repository
             objFromDb.MovieId = movieItem.MovieId;
             objFromDb.MovieFormat = movieItem.MovieFormat;
             objFromDb.Stock = movieItem.Stock;
+            objFromDb.ItemCondition = movieItem.ItemCondition;
+            objFromDb.MyRating = movieItem.MyRating;
+            objFromDb.MyComments = movieItem.MyComments;
 
             _db.SaveChanges();
         }

@@ -32,9 +32,7 @@ namespace MovieCollections.DataAccess.Data.Repository
             var objFromDb = _db.Collections.FirstOrDefault(s => s.Id == collections.Id);
 
             objFromDb.MovieItemId = collections.MovieItemId;
-            objFromDb.ItemCondition = collections.ItemCondition;
-            objFromDb.MyRating = collections.MyRating;
-            objFromDb.MyComments = collections.MyComments;
+            objFromDb.DisplayOrder = collections.DisplayOrder;
 
             _db.SaveChanges();
         }

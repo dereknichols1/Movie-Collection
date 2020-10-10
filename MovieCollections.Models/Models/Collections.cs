@@ -14,14 +14,8 @@ namespace MovieCollections.Models
         [Display(Name = "Movie Item")]
         public int MovieItemId { get; set; }
 
-        [Display(Name = "Item Condition")]
-        public int ItemCondition { get; set; }
-
-        [Display(Name = "My Rating")]
-        public int MyRating { get; set; }
-
-        [Display(Name = "My Comments")]
-        public int MyComments { get; set; }
+        [Display(Name = "Display Order")]
+        public int DisplayOrder { get; set; }
 
         [ForeignKey("MovieItemId")]
         public virtual MovieItem MovieItem { get; set; }

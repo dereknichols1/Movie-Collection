@@ -24,8 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\" />
-    <Folder Include="Pages\Collector\Home\" />
+    <Folder Include="Pages\Admin\Collection\" />
+    <Folder Include="Pages\Admin\MovieItem\" />
+    <Folder Include="Pages\Admin\Movie\" />
   </ItemGroup>
 
 </Project>

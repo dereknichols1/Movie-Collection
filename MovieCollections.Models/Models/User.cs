@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-using MovieCollections.Models.Models;
 
 namespace MovieCollections.Models
 {
+    [Table("AspNetUsers")]
     public class User : IdentityUser
     {
         public string FirstName { get; set; }
