@@ -17,7 +17,7 @@ namespace MovieCollections.DataAccess.Data.Repository
             _db = db;
         }
 
-        public IEnumerable<SelectListItem> GetMovieListForDropDown()
+        public IEnumerable<SelectListItem> GetMovieItemListForDropDown()
         {
             return _db.MovieItem.Select(i => new SelectListItem()
             {
@@ -31,11 +31,10 @@ namespace MovieCollections.DataAccess.Data.Repository
             var objFromDb = _db.MovieItem.FirstOrDefault(s => s.Id == movieItem.Id);
 
             objFromDb.MovieId = movieItem.MovieId;
+            objFromDb.CollectionsId = movieItem.CollectionsId;
             objFromDb.MovieFormat = movieItem.MovieFormat;
-            objFromDb.Stock = movieItem.Stock;
             objFromDb.ItemCondition = movieItem.ItemCondition;
-            objFromDb.MyRating = movieItem.MyRating;
-            objFromDb.MyComments = movieItem.MyComments;
+            objFromDb.UserId = movieItem.UserId;
 
             _db.SaveChanges();
         }

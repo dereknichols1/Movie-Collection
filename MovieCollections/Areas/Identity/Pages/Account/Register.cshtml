@@ -16,7 +16,7 @@
 
                 <div class="card-body px-lg-5 pt-4">
                     <form method="post" autocomplete="off" asp-route-returnUrl="@Model.ReturnUrl">
-                        <h3 class="col-12 text-success text-center py-4">
+                        <h3 class="col-12 text-info text-center py-4">
                             @if (User.IsInRole(SD.CollectorRole))
                             {
                                 <strong>Register an Employee</strong>
@@ -58,7 +58,7 @@
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <button type="submit" class="btn btn-success form-control">Register</button>
+                            <button type="submit" class="btn btn-info form-control">Register</button>
                         </div>
 
                     </form>

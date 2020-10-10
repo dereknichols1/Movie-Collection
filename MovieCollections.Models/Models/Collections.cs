@@ -11,14 +11,10 @@ namespace MovieCollections.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Movie Item")]
-        public int MovieItemId { get; set; }
+        [Display(Name = "Collection Name")]
+        public string CollectionName { get; set; }
 
         [Display(Name = "Display Order")]
         public int DisplayOrder { get; set; }
-
-        [ForeignKey("MovieItemId")]
-        public virtual MovieItem MovieItem { get; set; }
-
     }
 }

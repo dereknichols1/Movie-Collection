@@ -1,0 +1,83 @@
+﻿@page
+@model MovieCollections.Pages.Admin.MovieItem.UpsertModel
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+                <h2 class="text-primary">@(Model.MovieItemObj.MovieItem.Id != 0 ? "Update" : "Create") Movie Item</h2>
+            </div>
+
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.MovieItem.MovieId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.MovieItemObj.MovieItem.MovieId,
+                                              Model.MovieItemObj.MovieList,
+                                              "- Please select a movie - ",
+                                              new { @class = "form-control" })
+                        <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.MovieId"></span>
+                    </div>
+                    @if (Model.MovieItemObj.MovieItem.Id != 0)
+                    {
+                        <input type="hidden" asp-for="MovieItemObj.MovieItem.Id" />
+                    }
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.MovieItem.MovieFormat"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MovieItemObj.MovieItem.MovieFormat" />
+                        <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.MovieFormat"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.MovieItem.ItemCondition"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MovieItemObj.MovieItem.ItemCondition" />
+                        <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.ItemCondition"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.MovieItem.CollectionsId"></label>
+                    </div>
+                    <div class="col-9">
+                        @Html.DropDownListFor(m => m.MovieItemObj.MovieItem.CollectionsId,
+                                              Model.MovieItemObj.CollectionsList,
+                                              "- Please select a collection - ",
+                                              new { @class = "form-control" })
+                        <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.CollectionsId"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                @if (Model.MovieItemObj.MovieItem.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

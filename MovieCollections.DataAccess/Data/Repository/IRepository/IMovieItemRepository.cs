@@ -8,7 +8,7 @@ namespace MovieCollections.DataAccess.Data.Repository.IRepository
 {
     public interface IMovieItemRepository : IRepository<MovieItem>
     {
-        IEnumerable<SelectListItem> GetMovieListForDropDown();
+        IEnumerable<SelectListItem> GetMovieItemListForDropDown();
 
         void Update(MovieItem movieItem);
     }

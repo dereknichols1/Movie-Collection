@@ -22,7 +22,7 @@ namespace MovieCollections.DataAccess.Data.Repository
         {
             return _db.Collections.Select(i => new SelectListItem()
             {
-                Text = i.MovieItem.Movie.Title,
+                Text = i.CollectionName,
                 Value = i.Id.ToString()
             });
         }
@@ -31,7 +31,7 @@ namespace MovieCollections.DataAccess.Data.Repository
         {
             var objFromDb = _db.Collections.FirstOrDefault(s => s.Id == collections.Id);
 
-            objFromDb.MovieItemId = collections.MovieItemId;
+            objFromDb.CollectionName = collections.CollectionName;
             objFromDb.DisplayOrder = collections.DisplayOrder;
 
             _db.SaveChanges();

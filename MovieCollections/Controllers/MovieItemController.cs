@@ -23,7 +23,7 @@ namespace MovieCollections.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.MovieItem.GetAll() });
+            return Json(new { data = _unitOfWork.MovieItem.GetAll(null, null, "Movie,Collections") });
         }
 
         [HttpDelete("{id}")]

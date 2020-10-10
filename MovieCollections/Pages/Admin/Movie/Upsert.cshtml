@@ -1,0 +1,118 @@
+﻿@page
+@model MovieCollections.Pages.Admin.Movie.UpsertModel
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row px-2 mx-2 backgroundWhite border">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
+                <h2 class="text-primary">@(Model.MovieItemObj.Id != 0 ? "Update" : "Create") Movie</h2>
+            </div>
+
+            <div class="col-8 pt-3">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.Title"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MovieItemObj.Title" />
+                        <span class="text-danger" asp-validation-for="MovieItemObj.Title"></span>
+                    </div>
+                    @if (Model.MovieItemObj.Id != 0)
+                    {
+                        <input type="hidden" asp-for="MovieItemObj.Id" />
+                    }
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.Genre"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MovieItemObj.Genre" />
+                        <span class="text-danger" asp-validation-for="MovieItemObj.Genre"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.Length"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MovieItemObj.Length" />
+                        <span class="text-danger" asp-validation-for="MovieItemObj.Length"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.Rating"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="MovieItemObj.Rating" />
+                        <span class="text-danger" asp-validation-for="MovieItemObj.Rating"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.Image"></label>
+                    </div>
+                    <div class="col-9">
+                        <input type="file" class="form-control" id="uploadBox" name="files" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="MovieItemObj.MyComments"></label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" asp-for="MovieItemObj.MyComments" id="txtDesc" style="height:200px;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-9 offset-3">
+                        <div class="row">
+                            <div class="col-6">
+                                @if (Model.MovieItemObj.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                                }
+                            </div>
+                            <div class="col-6">
+                                <a asp-page="./Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (Model.MovieItemObj != null)
+            {
+                <div class="col-4 p-4">
+                    <img src="@Model.MovieItemObj.Image" style="border-radius:5px;  width:100%; border: 1px solid #bbb9b9" />
+                </div>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+
+    tinymce.init({
+        selector: 'textarea',
+        plugins: "lists",
+        menubar: 'file edit format'
+    });
+
+    function ValidateInput() {
+        if (document.getElementById("uploadBox").value == "") {
+            swal('Error', 'Please Select an Image', 'error')
+            return false;
+        }
+        return true;
+    }
+    </script>
+}

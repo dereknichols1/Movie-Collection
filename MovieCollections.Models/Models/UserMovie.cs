@@ -16,6 +16,6 @@ namespace MovieCollections.Models
 
         public int MovieId { get; set; }
 
-        public Movie Movie { get; set; }
+        public MovieItem MovieItem { get; set; }
     }
 }

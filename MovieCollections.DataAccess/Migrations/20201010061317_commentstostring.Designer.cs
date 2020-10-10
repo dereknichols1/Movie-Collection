@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieCollections.DataAccess.Data;
 
 namespace MovieCollections.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201010061317_commentstostring")]
+    partial class commentstostring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,7 +236,12 @@ namespace MovieCollections.DataAccess.Migrations
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
+                    b.Property<int>("MovieItemId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MovieItemId");
 
                     b.ToTable("Collections");
                 });
@@ -277,11 +284,8 @@ namespace MovieCollections.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CollectionsId")
+                    b.Property<int>("ItemCondition")
                         .HasColumnType("int");
-
-                    b.Property<string>("ItemCondition")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovieFormat")
                         .HasColumnType("nvarchar(max)");
@@ -289,12 +293,13 @@ namespace MovieCollections.DataAccess.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CollectionsId");
 
                     b.HasIndex("MovieId");
 
@@ -395,14 +400,17 @@ namespace MovieCollections.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieCollections.Models.MovieItem", b =>
+            modelBuilder.Entity("MovieCollections.Models.Collections", b =>
                 {
-                    b.HasOne("MovieCollections.Models.Collections", "Collections")
+                    b.HasOne("MovieCollections.Models.MovieItem", "MovieItem")
                         .WithMany()
-                        .HasForeignKey("CollectionsId")
+                        .HasForeignKey("MovieItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("MovieCollections.Models.MovieItem", b =>
+                {
                     b.HasOne("MovieCollections.Models.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")

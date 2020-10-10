@@ -13,9 +13,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css" />
 </head>
-<body class="search-background">
+<body class="search-background bg-secondary">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary text-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark text-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/images/logo.png" alt="logo" /> </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,13 +28,13 @@
                         @if (User.IsInRole(SD.CollectorRole))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
+                                <a class="nav-link text-white bg-dark border-secondary dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
                                     Admin
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item text-black" asp-page="/Admin/Category/Index">Collection</a>
+                                    <a class="dropdown-item text-black" asp-page="/Admin/Collection/Index">Collection</a>
                                     <a class="dropdown-item text-black" asp-page="/Admin/MovieItem/Index">Movie Items</a>
-                                    <a class="dropdown-item text-black" asp-page="/Admin/Movies/Index">Movies</a>
+                                    <a class="dropdown-item text-black" asp-page="/Admin/Movie/Index">Movies</a>
                                     <a class="dropdown-item text-black" asp-page="/Admin/User/Index">User</a>
                                 </div>
                             </li>
@@ -50,7 +50,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-primary">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container text-white">
             &copy; 2020 - Movie Collection - <a class="text-white" asp-page="/Privacy">Privacy</a>
         </div>

@@ -27,9 +27,8 @@ namespace MovieCollections.Models
         [Display(Name = "MPAA Rating")]
         public string Rating { get; set; }
 
-        [Display(Name = "Users")]
-        public string UserId { get; set; }
+        [Display(Name = "My Comments")]
+        public string MyComments { get; set; }
 
-        public virtual ICollection<UserMovie> UserMovie { get; set; }
     }
 }

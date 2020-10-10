@@ -23,7 +23,7 @@ namespace MovieCollections.Pages.Collector.Home
         public void OnGet()
         {
             CollectionsList = _unitOfWork.Collections.GetAll(null, q => q.OrderBy(c => c.DisplayOrder), null);
-            MovieItemList = _unitOfWork.MovieItem.GetAll();
+            MovieItemList = _unitOfWork.MovieItem.GetAll(null, null, "Movie");
 
         }
     }

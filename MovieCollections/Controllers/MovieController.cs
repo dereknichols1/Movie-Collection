@@ -25,7 +25,7 @@ namespace MovieCollections.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.Movie.GetAll(null, null, "Collections,MovieController") });
+            return Json(new { data = _unitOfWork.Movie.GetAll() });
         }
 
         [HttpDelete("{id}")]
