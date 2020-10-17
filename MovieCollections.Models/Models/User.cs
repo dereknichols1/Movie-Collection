@@ -17,9 +17,5 @@ namespace MovieCollections.Models
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
 
-        [Display(Name = "Movies")]
-        public int MovieId { get; set; }
-
-        public virtual ICollection<UserMovie> UserMovie { get; set; }
     }
 }

@@ -231,8 +231,8 @@ namespace MovieCollections.DataAccess.Migrations
                     b.Property<string>("CollectionName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -301,31 +301,6 @@ namespace MovieCollections.DataAccess.Migrations
                     b.ToTable("MovieItem");
                 });
 
-            modelBuilder.Entity("MovieCollections.Models.UserMovie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MovieItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieItemId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserMovie");
-                });
-
             modelBuilder.Entity("MovieCollections.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -335,9 +310,6 @@ namespace MovieCollections.DataAccess.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
 
                     b.ToTable("AspNetUsers");
 
@@ -408,17 +380,6 @@ namespace MovieCollections.DataAccess.Migrations
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MovieCollections.Models.UserMovie", b =>
-                {
-                    b.HasOne("MovieCollections.Models.MovieItem", "MovieItem")
-                        .WithMany("UserMovie")
-                        .HasForeignKey("MovieItemId");
-
-                    b.HasOne("MovieCollections.Models.User", "User")
-                        .WithMany("UserMovie")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

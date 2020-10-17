@@ -21,6 +21,5 @@ namespace MovieCollections.DataAccess.Data
 
         public DbSet<MovieCollections.Models.User> User { get; set; }
 
-        public DbSet<MovieCollections.Models.UserMovie> UserMovie { get; set; }
     }
 }

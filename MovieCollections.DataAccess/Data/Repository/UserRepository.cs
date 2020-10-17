@@ -22,8 +22,6 @@ namespace MovieCollections.DataAccess.Data.Repository
         {
             var itemFromDb = _db.User.FirstOrDefault(m => m.Id == user.Id);
 
-            itemFromDb.MovieId = user.MovieId;
-
             _db.SaveChanges();
         }
 

@@ -87,11 +87,11 @@ namespace MovieCollections.Areas.Identity.Pages.Account
             //retrieve the role from the form
             string role = Request.Form["rdUserRole"].ToString();
             if (role == "")
-            { role = SD.CollectorRole; } //make the first login a manager)
+            { role = SD.AdminRole; } //make the first login a manager)
             returnUrl = returnUrl ?? Url.Content("~/"); //null-coalescing assignment operator ??= assigns the value of right-hand operand to its left-hand operand only if the left-hand is null
             if (ModelState.IsValid)
             {
-                //expand identityuser with applicationuser properties
+                //expand identityuser with user properties
                 var user = new User
                 {
                     UserName = Input.Email,
@@ -102,14 +102,21 @@ namespace MovieCollections.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 //add the roles to the ASPNET Roles table if they do not exist yet
-                if (!await _roleManager.RoleExistsAsync(SD.CollectorRole))
+                if (!await _roleManager.RoleExistsAsync(SD.AdminRole))
                 {
                     _roleManager.CreateAsync(new IdentityRole(SD.CollectorRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.AdminRole)).GetAwaiter().GetResult();
                 }
                 if (result.Succeeded)
                 //assign role to the user (from the form radio options available after the first manager is created)
                 {
-                    await _userManager.AddToRoleAsync(user, SD.CollectorRole);
+                    if (role == SD.AdminRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
+                    }
+                    else {
+                        await _userManager.AddToRoleAsync(user, SD.CollectorRole);
+                    }
 
                     _logger.LogInformation("User created a new account with password.");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

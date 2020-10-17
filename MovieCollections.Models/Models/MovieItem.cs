@@ -11,11 +11,11 @@ namespace MovieCollections.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Movie")]
         public int MovieId { get; set; }
 
-        [Display(Name = "Collections")]
         public int CollectionsId { get; set; }
+
+        public string UserId { get; set; }
 
         [Display(Name = "Movie Format")]
         public string MovieFormat { get; set; }
@@ -29,9 +29,9 @@ namespace MovieCollections.Models
         [ForeignKey("CollectionsId")]
         public virtual Collections Collections { get; set; }
 
-        [Display(Name = "Users")]
-        public string UserId { get; set; }
+        [NotMapped]
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
-        public virtual ICollection<UserMovie> UserMovie { get; set; }
     }
 }

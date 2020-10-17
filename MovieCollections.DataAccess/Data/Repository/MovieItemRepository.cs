@@ -23,7 +23,7 @@ namespace MovieCollections.DataAccess.Data.Repository
             {
                 Text = i.Movie.Title,
                 Value = i.Id.ToString()
-            });
+            }) ;
         }
 
         public void Update(MovieItem movieItem)

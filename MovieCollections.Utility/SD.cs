@@ -6,6 +6,7 @@ namespace MovieCollections.Utility
 {
     public class SD
     {
+        public const string AdminRole = "Admin";
         public const string CollectorRole = "Collector";
     }
 }

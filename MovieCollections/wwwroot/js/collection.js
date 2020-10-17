@@ -12,8 +12,7 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { data: "collectionName", width: "40%" },
-            { data: "displayOrder", width: "30%" },
+            { data: "collectionName", width: "70%" },
             { data: "id",
                 "render": function (data) {
                     return `

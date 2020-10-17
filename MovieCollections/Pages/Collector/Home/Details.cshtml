@@ -1,0 +1,14 @@
+﻿@page
+@model MovieCollections.Pages.Collector.Home.DetailsModel
+@{
+    <img src="@Model.MovieObj.Image" class="img-thumbnail w-25 p-3 bg-info" />
+    <div>
+        <b>Title: </b>@Model.MovieObj.Title
+    </div>
+    <div><b>Genre: </b> @Model.MovieObj.Genre</div>
+    <div><b>Length: </b> @Model.MovieObj.Length</div>
+    <div><b>Rating: </b> @Model.MovieObj.Rating</div>
+    <div><b>Comments: </b> @Model.MovieObj.MyComments</div>
+
+
+}

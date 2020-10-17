@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MovieCollections.Controllers
@@ -23,7 +24,23 @@ namespace MovieCollections.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.MovieItem.GetAll(null, null, "Movie,Collections") });
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole(Utility.SD.AdminRole);
+
+            JsonResult jsonResult = null;
+
+            if (isAdmin)
+            {
+                jsonResult = Json(new { data = _unitOfWork.MovieItem.GetAll(null, null, "Movie,Collections") });
+            }
+            else
+            {
+                jsonResult = Json(new { data = _unitOfWork.MovieItem.GetAll(c => c.UserId.Equals(claim.Value), null, "Movie,Collections") });
+            }
+            return jsonResult;
+
+            //return Json(new { data = _unitOfWork.MovieItem.GetAll(null, null, "Movie,Collections") });
         }
 
         [HttpDelete("{id}")]

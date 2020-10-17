@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MovieCollections.DataAccess.Data.Repository.IRepository;
+using MovieCollections.Models;
 using MovieCollections.Models.ViewModels;
 
 namespace MovieCollections.Pages.Admin.MovieItem
@@ -18,25 +21,37 @@ namespace MovieCollections.Pages.Admin.MovieItem
             _unitOfWork = unitOfWork;
         }
 
+        public IEnumerable<Collections> CollectionsList { get; set; }
+
         [BindProperty]
         public MovieItemVM MovieItemObj { get; set; }
 
         public IActionResult OnGet(int? id)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole(MovieCollections.Utility.SD.AdminRole);
+
             MovieItemObj = new MovieItemVM
             {
                 MovieItem = new Models.MovieItem(),
                 MovieList = _unitOfWork.Movie.GetMovieListForDropDown(),
-                CollectionsList = _unitOfWork.Collections.GetCollectionsListForDropDown()
+                CollectionsList = isAdmin ? _unitOfWork.Collections.GetCollectionsListForDropDown() : _unitOfWork.Collections.GetCollectionsListForDropDown(claim.Value)
             };
-
+  
             if (id != null)
             {
-                MovieItemObj.MovieItem = _unitOfWork.MovieItem.GetFirstOrDefault(u => u.Id == id);
-
-                if (MovieItemObj == null)
+                if (claim != null)
                 {
-                    return NotFound();
+                    Models.MovieItem movieItem = _unitOfWork.MovieItem.GetFirstOrDefault(c => c.UserId == claim.Value);
+                    MovieItemObj.MovieItem = movieItem;
+
+                    //MovieItemObj.MovieItem = _unitOfWork.MovieItem.GetFirstOrDefault(u => u.Id == id);
+
+                    if (MovieItemObj == null)
+                    {
+                        return NotFound();
+                    }
                 }
             }
 
@@ -46,6 +61,9 @@ namespace MovieCollections.Pages.Admin.MovieItem
 
         public IActionResult OnPost()
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -53,6 +71,7 @@ namespace MovieCollections.Pages.Admin.MovieItem
 
             if (MovieItemObj.MovieItem.Id == 0) //means a brand new movie item
             {
+                MovieItemObj.MovieItem.UserId = claim.Value;
                 _unitOfWork.MovieItem.Add(MovieItemObj.MovieItem);
             }
 

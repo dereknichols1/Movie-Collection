@@ -14,13 +14,14 @@
             <div class="col-8 pt-3">
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="MovieItemObj.MovieItem.MovieId"></label>
+                        <label asp-for="MovieItemObj.MovieItem.Movie"></label>
                     </div>
                     <div class="col-9">
                         @Html.DropDownListFor(m => m.MovieItemObj.MovieItem.MovieId,
-                                              Model.MovieItemObj.MovieList,
-                                              "- Please select a movie - ",
-                                              new { @class = "form-control" })
+                                Model.MovieItemObj.MovieList,
+                                "- Please select a movie - ",
+                                new { @class = "form-control" })
+
                         <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.MovieId"></span>
                     </div>
                     @if (Model.MovieItemObj.MovieItem.Id != 0)
@@ -46,18 +47,36 @@
                         <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.ItemCondition"></span>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="MovieItemObj.MovieItem.CollectionsId"></label>
+                @if (User.IsInRole(MovieCollections.Utility.SD.AdminRole))
+                {
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="MovieItemObj.MovieItem.CollectionsId"></label>
+                        </div>
+                        <div class="col-9">
+                            @Html.DropDownListFor(m => m.MovieItemObj.MovieItem.CollectionsId,
+                                Model.MovieItemObj.CollectionsList,
+                                "- Please select a collection - ",
+                                new { @class = "form-control" })
+                            <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.CollectionsId"></span>
+                        </div>
                     </div>
-                    <div class="col-9">
-                        @Html.DropDownListFor(m => m.MovieItemObj.MovieItem.CollectionsId,
-                                              Model.MovieItemObj.CollectionsList,
-                                              "- Please select a collection - ",
-                                              new { @class = "form-control" })
-                        <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.CollectionsId"></span>
+                }
+                else
+                {
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="MovieItemObj.MovieItem.CollectionsId"></label>
+                        </div>
+                        <div class="col-9">
+                            @Html.DropDownListFor(m => m.MovieItemObj.MovieItem.CollectionsId,
+                                Model.MovieItemObj.CollectionsList,
+                                "- Please select a collection - ",
+                                new { @class = "form-control" })
+                            <span class="text-danger" asp-validation-for="MovieItemObj.MovieItem.CollectionsId"></span>
+                        </div>
                     </div>
-                </div>
+                }
                 <div class="form-group row">
                     <div class="col-9 offset-3">
                         <div class="row">

@@ -3,36 +3,80 @@
 @{
     ViewData["Title"] = "Index";
 }
-@foreach (var collection in Model.CollectionsList)
-{
-    @if (Model.CollectionsList.Where(c => c.Id == collection.Id).Count() > 0)
-    {
-        <div class="row container pb-3">
-            <div class="col-12">
-                <div class="row">
-                    <h2 class="text-info pl-1"><b>@collection.CollectionName</b></h2>
 
-                    <div class="col-12">
-                        <div class="row my-3">
-                            @foreach (var movieItem in Model.MovieItemList.Where(c => c.CollectionsId == collection.Id))
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row container pb-3">
+        <div class="col-12">
+
+            
+
+            <div class="row">
+                @foreach (var collection in Model.CollectionsList)
+                {
+                    @if (collection.UserId.Equals(Model.UserId))
+                    {
+                        <h2 class="text-info pl-1"><b>@collection.CollectionName</b></h2>
+
+                        @foreach (var movieItem in Model.MovieItemList)
+                        {
+                            @if (movieItem.CollectionsId == collection.Id)
                             {
-                                <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
-                                    <div class="card bg-info" style="border:2px solid #000000; border-radius: 5px; ">
-                                        <div class="pl-3 pt-1 text-center">
-                                            <h3 class="card-title text-dark"><b>@movieItem.Movie.Title</b></h3>
-                                        </div>
-                                        <div class="d-flex justify-content-between form-control bg-info" style="border:0px;">
-                                            <div class="col-6 badge badge-warning text-center bg-warning" style="font-size:14px;">
-                                                @movieItem.MovieFormat
+                                <div class="col-12">
+                                    <div class="row my-3">
+                                        <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
+                                            <div class="card bg-info" style="border:2px solid #000000; border-radius: 5px; ">
+                                                <div class="pl-3 pt-1 text-center">
+                                                    <h3 class="card-title text-dark"><b>@movieItem.Movie.Title</b></h3>
+                                                </div>
+                                                <div class="d-flex justify-content-between form-control bg-info" style="border:0px;">
+                                                    <div class="col-6 badge badge-warning text-center bg-warning" style="font-size:14px;">
+                                                        @movieItem.MovieFormat
+                                                    </div>
+                                                </div>
+                                                <img src="@movieItem.Movie.Image" class="card-img-top p-2 rounded" />
+                                                <a asp-page="Details" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movieItem.Movie.Id">Details</a>
                                             </div>
-                                         </div>
-                                        <img src="@movieItem.Movie.Image" class="card-img-top p-2 rounded" />
-                                        <a asp-page="Details" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movieItem.Id">Details</a>
+                                        </div>
                                     </div>
                                 </div>
                             }
-                        </div>
-                    </div>
-                </div>
+                        }
+                    }
+                }
             </div>
-        </div>}}
+        </div>
+    </div>
+    }
+
+    else
+    {
+    <div class="row container pb-3">
+        <div class="col-12">
+            <div class="row">
+
+                <h2 class="text-info pl-1"><b>Movies</b></h2>
+
+                @foreach (var movie in Model.MovieList)
+                {
+                    @if (Model.MovieList.Where(c => c.Id == movie.Id).Count() > 0)
+                    {
+                        <div class="col-12">
+                            <div class="row my-3">
+                                <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
+                                    <div class="card bg-info" style="border:2px solid #000000; border-radius: 5px; ">
+                                        <div class="pl-3 pt-1 text-center">
+                                            <h3 class="card-title text-dark"><b>@movie.Title</b></h3>
+                                        </div>
+                                        <div class="d-flex justify-content-between form-control bg-info" style="border:0px;">
+                                        </div>
+                                        <img src="@movie.Image" class="card-img-top p-2 rounded" />
+                                        <a asp-page="Details" id="movieDetails" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movie.Id">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>}}
+            </div>
+        </div>
+    </div>
+    }

@@ -10,6 +10,8 @@ namespace MovieCollections.DataAccess.Data.Repository.IRepository
     {
         IEnumerable<SelectListItem> GetCollectionsListForDropDown();
 
+        IEnumerable<SelectListItem> GetCollectionsListForDropDown(string userId);
+
         void Update(Collections collections);
     }
 }
