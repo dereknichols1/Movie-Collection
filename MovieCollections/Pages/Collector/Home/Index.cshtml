@@ -8,44 +8,41 @@
 {
     <div class="row container pb-3">
         <div class="col-12">
-
-            
-
-            <div class="row">
-                @foreach (var collection in Model.CollectionsList)
-                {
-                    @if (collection.UserId.Equals(Model.UserId))
-                    {
-                        <h2 class="text-info pl-1"><b>@collection.CollectionName</b></h2>
-
-                        @foreach (var movieItem in Model.MovieItemList)
-                        {
-                            @if (movieItem.CollectionsId == collection.Id)
+                        <div class="row">
+                            @foreach (var collection in Model.CollectionsList)
                             {
-                                <div class="col-12">
-                                    <div class="row my-3">
-                                        <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
-                                            <div class="card bg-info" style="border:2px solid #000000; border-radius: 5px; ">
-                                                <div class="pl-3 pt-1 text-center">
-                                                    <h3 class="card-title text-dark"><b>@movieItem.Movie.Title</b></h3>
-                                                </div>
-                                                <div class="d-flex justify-content-between form-control bg-info" style="border:0px;">
-                                                    <div class="col-6 badge badge-warning text-center bg-warning" style="font-size:14px;">
-                                                        @movieItem.MovieFormat
+                                @if (collection.UserId.Equals(Model.UserId))
+                                {
+                                    <h2 class="text-info pl-1"><b>@collection.CollectionName</b></h2>
+
+                                    @foreach (var movieItem in Model.MovieItemList)
+                                    {
+                                        @if (movieItem.CollectionsId == collection.Id)
+                                        {
+                                            <div class="col-12">
+                                                <div class="row my-3">
+                                                    <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
+                                                        <div class="card bg-info" style="border:2px solid #000000; border-radius: 5px; ">
+                                                            <div class="pl-3 pt-1 text-center">
+                                                                <h3 class="card-title text-dark"><b>@movieItem.Movie.Title</b></h3>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between form-control bg-info" style="border:0px;">
+                                                                <div class="col-6 badge badge-warning text-center bg-warning" style="font-size:14px;">
+                                                                    @movieItem.MovieFormat
+                                                                </div>
+                                                            </div>
+                                                            <img src="@movieItem.Movie.Image" class="card-img-top p-2 rounded" />
+                                                            <a asp-page="Details" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movieItem.Movie.Id">Details</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <img src="@movieItem.Movie.Image" class="card-img-top p-2 rounded" />
-                                                <a asp-page="Details" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movieItem.Movie.Id">Details</a>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        }
+                                    }
+                                }
                             }
-                        }
-                    }
-                }
-            </div>
-        </div>
+                        </div>
+</div>
     </div>
     }
 
@@ -53,29 +50,85 @@
     {
     <div class="row container pb-3">
         <div class="col-12">
-            <div class="row">
+            <div>
+                <div class="row">
+                    <div class="col-6">
+                        
+                    </div>
 
-                <h2 class="text-info pl-1"><b>Movies</b></h2>
-
-                @foreach (var movie in Model.MovieList)
-                {
-                    @if (Model.MovieList.Where(c => c.Id == movie.Id).Count() > 0)
-                    {
-                        <div class="col-12">
-                            <div class="row my-3">
-                                <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
-                                    <div class="card bg-info" style="border:2px solid #000000; border-radius: 5px; ">
-                                        <div class="pl-3 pt-1 text-center">
-                                            <h3 class="card-title text-dark"><b>@movie.Title</b></h3>
-                                        </div>
-                                        <div class="d-flex justify-content-between form-control bg-info" style="border:0px;">
-                                        </div>
-                                        <img src="@movie.Image" class="card-img-top p-2 rounded" />
-                                        <a asp-page="Details" id="movieDetails" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movie.Id">Details</a>
-                                    </div>
-                                </div>
+                    <div class="col-6">
+                        <form asp-page="./Index" method="get">
+                            <div class="form-actions no-color">
+                                <p>
+                                    Find by Title:
+                                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                                    <input type="submit" value="Search" class="btn btn-primary bg-dark" /> |
+                                    <a asp-page="./Index" class="text-info">Back to full List</a>
+                                </p>
                             </div>
-                        </div>}}
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:25%">
+                                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                                   asp-route-currentFilter="@Model.CurrentFilter" class="text-info">Movies</a>
+                            </th>
+                            <th style="width:50%">
+
+                            </th>
+                            <th style="width:25%">
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var movie in Model.Movies)
+                        {
+                            @*@if (Model.MovieList.Where(c => c.Id == movie.Id).Count() > 0)
+                            {*@
+                                <tr>
+                                    <td>
+                                        <img src="@movie.Image" class="img-thumbnail p-3 bg-info" />
+                                    </td>
+                                    <td style="text-align:center">
+                                        @movie.Title
+                                    </td>
+                                    <td>
+                                        <a asp-page="Details" id="movieDetails" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@movie.Id">Details</a>
+                                    </td>
+                                </tr>
+
+
+                            @*}*@
+                        }
+                    </tbody>
+                </table>
+
+                @{
+                    var prevDisabled = !Model.Movies.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.Movies.HasNextPage ? "disabled" : "";
+                }
+
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.CurrentSort"
+                   asp-route-pageIndex="@(Model.Movies.PageIndex - 1)"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   class="btn btn-primary bg-dark @prevDisabled">
+                    Previous
+                </a>
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.CurrentSort"
+                   asp-route-pageIndex="@(Model.Movies.PageIndex + 1)"
+                   asp-route-currentFilter="@Model.CurrentFilter"
+                   class="btn btn-primary bg-dark @nextDisabled">
+                    Next
+                </a>
             </div>
         </div>
     </div>
