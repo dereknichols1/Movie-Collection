@@ -8,5 +8,7 @@ namespace MovieCollections.Utility
     {
         public const string AdminRole = "Admin";
         public const string CollectorRole = "Collector";
+
+        public const string MovieItem = "MovieItem";
     }
 }

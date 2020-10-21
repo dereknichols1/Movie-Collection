@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MovieCollections.DataAccess.Data.Repository.IRepository;
 using MovieCollections.Models;
 using MovieCollections.Models.ViewModels;
+using MovieCollections.Utility;
 
 namespace MovieCollections.Pages.Admin.MovieItem
 {
@@ -72,6 +74,7 @@ namespace MovieCollections.Pages.Admin.MovieItem
             if (MovieItemObj.MovieItem.Id == 0) //means a brand new movie item
             {
                 MovieItemObj.MovieItem.UserId = claim.Value;
+
                 _unitOfWork.MovieItem.Add(MovieItemObj.MovieItem);
             }
 

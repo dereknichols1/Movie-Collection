@@ -43,15 +43,15 @@
 
                         @if (User.IsInRole(SD.CollectorRole))
                         {
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-white bg-dark border-secondary dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
-                            Menu
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item text-black" asp-page="/Admin/Collection/Index">Add Collection</a>
-                            <a class="dropdown-item text-black" asp-page="/Admin/MovieItem/Index">Add Movie</a>
-                        </div>
-                    </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white bg-dark border-secondary dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">
+                                    Menu
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item text-black" asp-page="/Admin/Collection/Index">Add Collection</a>
+                                    <a class="dropdown-item text-black" asp-page="/Admin/MovieItem/Index">Add Movie</a>
+                                </div>
+                            </li>
                         }
                     </ul>
                 </div>

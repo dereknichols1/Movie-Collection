@@ -1,6 +1,11 @@
 ﻿@page
 @model MovieCollections.Pages.Admin.MovieItem.UpsertModel
 
+@using Microsoft.AspNetCore.Http
+@using MovieCollections.Utility
+
+@inject IHttpContextAccessor HttpContextAccessor
+
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
     <div class="container">
         <div class="row px-2 mx-2 backgroundWhite border">
@@ -8,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="col-12 px-3" style="border-bottom:1px solid #325d88">
-                <h2 class="text-primary">@(Model.MovieItemObj.MovieItem.Id != 0 ? "Update" : "Create") Movie Item</h2>
+                <h2 class="text-primary">@(Model.MovieItemObj.MovieItem.Id != 0 ? "Update" : "Create") @HttpContextAccessor.HttpContext.Session.GetString(SD.MovieItem)</h2>
             </div>
 
             <div class="col-8 pt-3">

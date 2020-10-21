@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieCollections.DataAccess.Data.Repository.IRepository;
+using MovieCollections.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +29,8 @@ namespace MovieCollections.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             var isAdmin = User.IsInRole(Utility.SD.AdminRole);
+
+            HttpContext.Session.SetString(SD.MovieItem, "Movie Item");
 
             JsonResult jsonResult = null;
 
